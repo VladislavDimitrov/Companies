@@ -1,0 +1,52 @@
+﻿@model CreateOfficeViewModel
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h3>Update Office</h3>
+<form class="col-lg-6" asp-controller="Office" asp-action="Update">
+    <div class="form-group">
+        <label>Office of:</label>
+        @if (Model.Companies.Count == 0)
+        {
+            <p class="text-danger">No companies exist in the system yet. Please create a company before creating an ofiice.</p>
+            <select asp-for="CompanyID" asp-items="Model.Companies"> </select>
+            <span asp-validation-for="@Model.CompanyID" class="text-danger"></span>
+        }
+        else
+        {
+            <select asp-for="CompanyID" asp-items="Model.Companies"> </select>
+            <span asp-validation-for="@Model.CompanyID" class="text-danger"></span>
+        }
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Country"></label>
+        <input asp-for="@Model.Country" class="form-control" />
+        <span asp-validation-for="@Model.Country" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.City"></label>
+        <input asp-for="@Model.City" class="form-control" />
+        <span asp-validation-for="@Model.City" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Street"></label>
+        <input asp-for="@Model.Street" class="form-control" />
+        <span asp-validation-for="@Model.Street" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Street number</label>
+        <input asp-for="@Model.StreetNumber" class="form-control" />
+        <span asp-validation-for="@Model.StreetNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Headquarters"></label>
+        <input type="checkbox" asp-for="@Model.Headquarters" class="form-control col-1" />
+        <span asp-validation-for="@Model.Headquarters" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-info">Submit</button>
+</form>
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial">
+}

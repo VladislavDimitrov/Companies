@@ -1,0 +1,50 @@
+﻿@model ManageEmployeesViewModel
+@{
+    ViewData["Title"] = "Manage";
+}
+
+<h3>Manage Employees</h3>
+<div>
+    <form asp-controller="Employee" asp-action="Manage">
+        <div>
+            <input class="form-control col-md-4" placeholder="Employee name..." type="text" asp-for="Input" />
+            <button class="btn btn-info" />Search
+        </div>
+    </form>
+</div>
+
+<br>
+<div asp-validation-summary="All" class="text-danger"></div>
+
+@if (Model != null)
+{
+    <br>
+    <h5>Search Results:</h5>
+    if (!(Model.Employees.Count == 0))
+    {
+
+        <table class="table table-hover col-md-10">
+            <tr style="background-color:lightblue">
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Experience level</th>
+                <th>Company</th>
+                <th>Office</th>
+            </tr>
+
+            @foreach (var employee in Model.Employees)
+            {
+                <tr>
+                    <td>@employee.FirstName</td>
+                    <td>@employee.LastName</td>
+                    <td>@employee.ExperienceLevel</td>
+                    <td>@employee.Company.Name</td>
+                    <td>@employee.Office.City, @employee.Office.Street</td>
+                    <td><a asp-controller="Employee" asp-action="Update" asp-route-id="@employee.ID">Update</a></td>
+                    <td><a asp-controller="Employee" asp-action="Delete" asp-route-id="@employee.ID" method="post">Delete</a></td>
+                </tr>
+            }
+
+        </table>
+    }
+}

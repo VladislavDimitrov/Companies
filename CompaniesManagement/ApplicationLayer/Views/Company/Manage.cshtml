@@ -1,0 +1,50 @@
+﻿@model ManageCompaniesViewModel
+@{
+    ViewData["Title"] = "ManageCompanies";
+}
+
+<h3>Manage Companies</h3>
+<div>
+    <form asp-controller="Company" asp-action="Manage">
+        <div>
+            <input class="form-control col-md-4" placeholder="Company name..." type="text" asp-for="Input" />
+            <button class="btn btn-info" />Search
+        </div>
+    </form>
+</div>
+
+<br>
+<div asp-validation-summary="All" class="text-danger"></div>
+
+@if (Model != null)
+{
+    <br>
+    <h5>Search Results:</h5>
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    if (!(Model.Companies.Count == 0))
+    {
+
+        <table class="table table-hover col-md-10">
+            <tr style="background-color:lightblue">
+                <th>Name</th>
+                <th>Creation date</th>
+                <th>Offices</th>
+                <th>Employees</th>
+            </tr>
+
+            @foreach (var company in Model.Companies)
+            {
+                <tr>
+                    <td>@company.Name</td>
+                    <td>@company.CreationDate</td>
+                    <td>@company.Offices.Count</td>
+                    <td>@company.Employees.Count</td>
+                    <td><a asp-controller="Company" asp-action="Update" asp-route-id="@company.ID">Update</a></td>
+                    <td><a asp-controller="Company" asp-action="Delete" asp-route-id="@company.ID" method="post">Delete</a></td>
+                </tr>
+            }
+
+        </table>
+    }
+}

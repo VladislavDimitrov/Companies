@@ -1,0 +1,23 @@
+﻿@model CompanyViewModel
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h3>Update Company</h3>
+<form class="col-lg-6" asp-controller="Company" asp-action="Update">
+    <div class="form-group">
+        <label asp-for="@Model.Name"></label>
+        <input asp-for="@Model.Name" class="form-control" />
+        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Creation date</label>
+        <input type="date" asp-for="@Model.CreationDate" class="form-control" />
+        <span asp-validation-for="@Model.CreationDate" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-info">Submit</button>
+</form>
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial">
+}

@@ -1,0 +1,55 @@
+﻿@model ManageOfficesViewModel
+@{
+    ViewData["Title"] = "Manage";
+}
+
+<h3>Manage Offices</h3>
+<div>
+    <form asp-controller="Office" asp-action="Manage">
+        <div>
+            <input class="form-control col-md-4" placeholder="Company name..." type="text" asp-for="Input" />
+            <button class="btn btn-info" />Search
+        </div>
+    </form>
+</div>
+
+<br>
+<div asp-validation-summary="All" class="text-danger"></div>
+
+@if (Model != null)
+{
+    <br>
+    <h5>Search Results:</h5>
+    if (!(Model.Offices.Count == 0))
+    {
+
+        <table class="table table-hover col-md-10">
+            <tr style="background-color:lightblue">
+                <th>Company</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Street</th>
+                <th>Street number</th>
+                <th>Headquarters</th>
+                <th>Employees</th>
+            </tr>
+
+            @foreach (var office in Model.Offices)
+            {
+                <tr>
+                    <td>@office.Company.Name</td>
+                    <td>@office.Country</td>
+                    <td>@office.City</td>
+                    <td>@office.Street</td>
+                    <td>@office.StreetNumber</td>
+                    <td>@office.Headquarters</td>
+                    <td>@office.Employees.Count</td>
+                    <td><a asp-controller="Office" asp-action="Update" asp-route-id="@office.ID">Update</a></td>
+                    <td><a asp-controller="Office" asp-action="Delete" asp-route-id="@office.ID" method="post">Delete</a></td>
+                </tr>
+            }
+
+        </table>
+    }
+}
+
